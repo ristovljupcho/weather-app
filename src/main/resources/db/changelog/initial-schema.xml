@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-city-table" author="ristovljupcho">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="city"/>
+            </not>
+        </preConditions>
+        <createTable tableName="city">
+            <column name="id" type="CHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100) NOT NULL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lat" type="DECIMAL(8,5) NOT NULL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lon" type="DECIMAL(8,5) NOT NULL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-forecast-table" author="ristovljupcho">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="forecast"/>
+            </not>
+        </preConditions>
+        <createTable tableName="forecast">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="forecast_date" type="DATE NOT NULL"/>
+            <column name="sunrise" type="DATETIME NOT NULL"/>
+            <column name="sunset" type="DATETIME NOT NULL"/>
+            <column name="temp_day" type="DOUBLE NOT NULL"/>
+            <column name="temp_min" type="DOUBLE NOT NULL"/>
+            <column name="temp_max" type="DOUBLE NOT NULL"/>
+            <column name="temp_night" type="DOUBLE"/>
+            <column name="temp_eve" type="DOUBLE"/>
+            <column name="temp_morn" type="DOUBLE"/>
+            <column name="feels_like_day" type="DOUBLE"/>
+            <column name="feels_like_night" type="DOUBLE"/>
+            <column name="feels_like_eve" type="DOUBLE"/>
+            <column name="feels_like_morn" type="DOUBLE"/>
+            <column name="pressure" type="INT"/>
+            <column name="humidity" type="INT"/>
+            <column name="weather_main" type="VARCHAR(50)"/>
+            <column name="weather_description" type="VARCHAR(100)"/>
+            <column name="wind_speed" type="DOUBLE"/>
+            <column name="wind_deg" type="INT"/>
+            <column name="wind_gust" type="DOUBLE"/>
+            <column name="clouds" type="INT"/>
+            <column name="pop" type="DOUBLE"/>
+            <column name="rain" type="DOUBLE"/>
+            <column name="city_id" type="CHAR(36) NOT NULL"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="forecast"
+                baseColumnNames="city_id"
+                referencedTableName="city"
+                referencedColumnNames="id"
+                constraintName="fk_forecast_city"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
+</databaseChangeLog>
