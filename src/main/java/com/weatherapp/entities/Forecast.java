@@ -31,7 +31,7 @@ public class Forecast {
 
     private LocalDate forecastDate;
 
-    private double tempDay;
+    private double tempMax;
 
     private String weatherMain;
 

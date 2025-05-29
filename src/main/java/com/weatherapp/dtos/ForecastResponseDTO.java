@@ -2,9 +2,9 @@ package com.weatherapp.dtos;
 
 import java.time.LocalDate;
 
-public record ForecastResponseDTO (
+public record ForecastResponseDTO(
         LocalDate forecastDate,
-        double tempDay,
+        double tempMax,
         String weatherMain
-){
+) {
 }

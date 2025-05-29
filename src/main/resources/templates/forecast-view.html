@@ -10,7 +10,7 @@
     <h1 class="mb-4">Weather Forecast</h1>
 
     <div th:if="${sunny}">
-        <h2>Sunny Days (Temp > 25°C) 😎</h2>
+        <h2>Sunny Days (Temp > 25°C)</h2>
         <div th:each="city : ${sunny}">
             <h4 th:text="${city.name}"></h4>
             <table class="table table-bordered">
@@ -18,14 +18,14 @@
                 <tr>
                     <th class="table-warning">Date</th>
                     <th class="table-warning">Weather</th>
-                    <th class="table-warning">Day Temp</th>
+                    <th class="table-warning">Maximum Temperature</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="forecast : ${city.forecasts}">
-                    <td th:text="${forecast.forecastDate}"></td>
-                    <td th:text="${forecast.weatherMain}"></td>
-                    <td th:text="${forecast.tempDay} + ' °C'"></td>
+                    <td class="col-lg-4" th:text="${#temporals.format(forecast.forecastDate, 'dd/MM/yyyy')}"></td>
+                    <td class="col-lg-4" th:text="${forecast.weatherMain}"></td>
+                    <td class="col-lg-4" th:text="${forecast.tempMax} + ' °C'"></td>
                 </tr>
                 </tbody>
             </table>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="mt-5" th:if="${rainy}">
-        <h2>Rainy Days (Rain, Drizzle, Thunderstorm) ☔</h2>
+        <h2>Rainy Days (Rain, Drizzle, Thunderstorm)</h2>
         <div th:each="city : ${rainy}">
             <h4 th:text="${city.name}"></h4>
             <table class="table table-bordered">
@@ -41,14 +41,14 @@
                 <tr>
                     <th class="table-info">Date</th>
                     <th class="table-info">Weather</th>
-                    <th class="table-info">Day Temp</th>
+                    <th class="table-info">Maximum Temperature</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="forecast : ${city.forecasts}">
-                    <td th:text="${forecast.forecastDate}"></td>
-                    <td th:text="${forecast.weatherMain}"></td>
-                    <td th:text="${forecast.tempDay} + ' °C'"></td>
+                    <td class="col-lg-4" th:text="${#temporals.format(forecast.forecastDate, 'dd/MM/yyyy')}"></td>
+                    <td class="col-lg-4" th:text="${forecast.weatherMain}"></td>
+                    <td class="col-lg-4" th:text="${forecast.tempMax} + ' °C'"></td>
                 </tr>
                 </tbody>
             </table>

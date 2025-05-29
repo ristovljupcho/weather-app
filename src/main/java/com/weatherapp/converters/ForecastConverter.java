@@ -10,9 +10,9 @@ import java.time.LocalDate;
 public class ForecastConverter {
     public ForecastResponseDTO toForecastResponseDTO(Forecast forecast) {
         LocalDate forecastDate = forecast.getForecastDate();
-        double tempDay = forecast.getTempDay();
+        double tempMax = forecast.getTempMax();
         String weatherMain = forecast.getWeatherMain();
 
-        return new ForecastResponseDTO(forecastDate, tempDay, weatherMain);
+        return new ForecastResponseDTO(forecastDate, tempMax, weatherMain);
     }
 }

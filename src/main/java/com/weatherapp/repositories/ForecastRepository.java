@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ForecastRepository extends JpaRepository<Forecast, UUID> {
-    @Query("SELECT f FROM Forecast f WHERE f.tempDay >= 25")
+    @Query("SELECT f FROM Forecast f WHERE f.tempMax > 25")
     List<Forecast> findWarmDays();
 
     @Query("SELECT f FROM Forecast f WHERE f.weatherMain IN ('Rain', 'Drizzle', 'Thunderstorm')")

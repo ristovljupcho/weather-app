@@ -37,7 +37,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="forecast_date" type="DATE NOT NULL"/>
-            <column name="temp_day" type="DOUBLE NOT NULL"/>
+            <column name="temp_max" type="DOUBLE NOT NULL"/>
             <column name="weather_main" type="VARCHAR(50) NOT NULL"/>
             <column name="city_id" type="UUID NOT NULL"/>
         </createTable>

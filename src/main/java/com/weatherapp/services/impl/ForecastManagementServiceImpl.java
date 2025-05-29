@@ -72,13 +72,13 @@ public class ForecastManagementServiceImpl implements ForecastManagementService 
             LocalDate date = Instant.ofEpochSecond(timestamp)
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate();
-            double tempDay = day.getJSONObject("temp").getDouble("max");
+            double tempMax = day.getJSONObject("temp").getDouble("max");
             String weatherType = day.getJSONArray("weather").getJSONObject(0).getString("main");
 
             Forecast forecast = new Forecast();
             forecast.setCity(city);
             forecast.setForecastDate(date);
-            forecast.setTempDay(tempDay);
+            forecast.setTempMax(tempMax);
             forecast.setWeatherMain(weatherType);
 
             forecasts.add(forecast);
