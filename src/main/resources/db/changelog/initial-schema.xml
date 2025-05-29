@@ -19,6 +19,11 @@
             <column name="lat" type="DECIMAL(8,5) NOT NULL"/>
             <column name="lon" type="DECIMAL(8,5) NOT NULL"/>
         </createTable>
+
+        <addUniqueConstraint
+                tableName="city"
+                columnNames="lat, lon"
+                constraintName="c_lat_lon"/>
     </changeSet>
 
     <changeSet id="create-forecast-table" author="ristovljupcho">
@@ -45,6 +50,11 @@
                 constraintName="fk_forecast_city"
                 onDelete="RESTRICT"
                 onUpdate="RESTRICT"/>
+
+        <addUniqueConstraint
+                tableName="forecast"
+                columnNames="forecast_date, city_id"
+                constraintName="c_forecast_date_city"/>
     </changeSet>
 
 </databaseChangeLog>
