@@ -1,11 +1,11 @@
 package com.weatherapp.services;
 
-import com.weatherapp.dtos.CityResponseDTO;
+import com.weatherapp.dtos.CityForecastResponseDTO;
 
 import java.util.List;
 
 public interface ForecastQueryService {
-    List<CityResponseDTO> findWarmDays();
+    List<CityForecastResponseDTO> findWarmDays();
 
-    List<CityResponseDTO> findRainyDays();
+    List<CityForecastResponseDTO> findRainyDays();
 }
