@@ -1,5 +1,6 @@
 package com.weatherapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,8 +35,9 @@ public class Forecast {
 
     private String weatherMain;
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
+    @ToString.Exclude
+    @JsonBackReference
     private City city;
 }
