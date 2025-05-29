@@ -10,8 +10,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * This class is responsible for providing conversion methods from {@link Forecast} entity to Data Transfer Objects
+ * and vice versa.
+ */
 @Component
 public class ForecastConverter {
+    /**
+     * Converts a {@link Forecast} entity to a {@link ForecastResponseDTO}.
+     *
+     * @param forecast The {@link Forecast} entity to convert
+     * @return a {@link ForecastResponseDTO}
+     */
     public ForecastResponseDTO toForecastResponseDTO(Forecast forecast) {
         LocalDate forecastDate = forecast.getForecastDate();
         double tempMax = forecast.getTempMax();
@@ -20,6 +30,13 @@ public class ForecastConverter {
         return new ForecastResponseDTO(forecastDate, tempMax, weatherMain);
     }
 
+    /**
+     * Converts a {@link City} entity and a list of {@link ForecastResponseDTO} into a {@link CityForecastResponseDTO}.
+     *
+     * @param city      The {@link City} entity to include in the response
+     * @param forecasts List of {@link ForecastResponseDTO} representing the weather forecasts for the city
+     * @return a {@link CityForecastResponseDTO} containing city details and its associated forecasts
+     */
     public CityForecastResponseDTO toCityResponseDTO(City city, List<ForecastResponseDTO> forecasts) {
         UUID id = city.getId();
         String name = city.getName();

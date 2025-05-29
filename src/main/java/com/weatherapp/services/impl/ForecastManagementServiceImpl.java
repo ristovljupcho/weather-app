@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Implementation of {@link ForecastManagementService} that manages the retrieval,
+ * parsing, and storage of weather forecast data for cities.
+ */
 @RequiredArgsConstructor
 @Service
 public class ForecastManagementServiceImpl implements ForecastManagementService {
@@ -36,6 +40,12 @@ public class ForecastManagementServiceImpl implements ForecastManagementService 
     private final RestTemplate restTemplate = new RestTemplate();
     private static final Logger log = LoggerFactory.getLogger(ForecastManagementServiceImpl.class);
 
+    /**
+     * Scheduled method that fetches weather forecasts for cities from the database from the OpenWeatherMap API,
+     * clears existing forecasts, and saves the new forecasts in the database.
+     * <p>
+     * This method is executed daily at midnight (00:00:00) server time.
+     */
     @Scheduled(cron = "0 0 0 * * *")
     @Transactional
     @Override
@@ -63,6 +73,13 @@ public class ForecastManagementServiceImpl implements ForecastManagementService 
         forecastRepository.saveAll(allForecasts);
     }
 
+    /**
+     * Helper method that parses the JSON response from the OpenWeatherMap API to a list of {@link Forecast} entities.
+     *
+     * @param json  The JSON response body from the OpenWeatherMap API
+     * @param city  The {@link City} entity the forecast is associated with
+     * @return a list of {@link Forecast} entities parsed from the response
+     */
     private List<Forecast> forecastJSONParser(String json, City city) {
         List<Forecast> forecasts = new LinkedList<>();
         JSONObject root = new JSONObject(json);
