@@ -24,7 +24,6 @@ public class ForecastQueryServiceImpl implements ForecastQueryService {
     private final ForecastConverter forecastConverter;
     private final CityConverter cityConverter;
 
-    //todo: Add helper method that will pair forecast with the city in DTO and send it to controller.
     @Override
     public List<CityResponseDTO> findWarmDays() {
         List<Forecast> forecasts = forecastRepository.findWarmDays();

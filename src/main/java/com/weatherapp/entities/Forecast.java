@@ -38,6 +38,5 @@ public class Forecast {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     @ToString.Exclude
-    @JsonBackReference
     private City city;
 }

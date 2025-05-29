@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h1 class="mb-4">Weather Forecast</h1>
+
+    <div th:if="${sunny}">
+        <h2>Sunny Days (Temp > 25°C) 😎</h2>
+        <div th:each="city : ${sunny}">
+            <h4 th:text="${city.name}"></h4>
+            <table class="table table-bordered">
+                <thead class="table-light">
+                <tr>
+                    <th class="table-warning">Date</th>
+                    <th class="table-warning">Weather</th>
+                    <th class="table-warning">Day Temp</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="forecast : ${city.forecasts}">
+                    <td th:text="${forecast.forecastDate}"></td>
+                    <td th:text="${forecast.weatherMain}"></td>
+                    <td th:text="${forecast.tempDay} + ' °C'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-5" th:if="${rainy}">
+        <h2>Rainy Days (Rain, Drizzle, Thunderstorm) ☔</h2>
+        <div th:each="city : ${rainy}">
+            <h4 th:text="${city.name}"></h4>
+            <table class="table table-bordered">
+                <thead class="table-light">
+                <tr>
+                    <th class="table-info">Date</th>
+                    <th class="table-info">Weather</th>
+                    <th class="table-info">Day Temp</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="forecast : ${city.forecasts}">
+                    <td th:text="${forecast.forecastDate}"></td>
+                    <td th:text="${forecast.weatherMain}"></td>
+                    <td th:text="${forecast.tempDay} + ' °C'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

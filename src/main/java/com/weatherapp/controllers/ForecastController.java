@@ -1,41 +1,28 @@
 package com.weatherapp.controllers;
 
 import com.weatherapp.dtos.CityResponseDTO;
-import com.weatherapp.entities.Forecast;
-import com.weatherapp.services.ForecastManagementService;
 import com.weatherapp.services.ForecastQueryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Controller
 @RequiredArgsConstructor
-@RestController
-@RequestMapping("/forecasts")
 public class ForecastController {
 
-    private final ForecastManagementService forecastManagementService;
-    private final ForecastQueryService findAllForecasts;
+    private final ForecastQueryService forecastQueryService;
 
-    @PostMapping("/fetch")
-    public ResponseEntity<String> fetchAndSaveForecasts() {
-        forecastManagementService.insertForecastsIntoDatabase();
-        return ResponseEntity.ok("Forecasts fetched and saved successfully.");
-    }
+    @GetMapping("/forecasts")
+    public String showWeather(Model model) {
+        List<CityResponseDTO> sunny = forecastQueryService.findWarmDays();
+        List<CityResponseDTO> rainy = forecastQueryService.findRainyDays();
 
-    @GetMapping("/sunny-days")
-    public ResponseEntity<List<CityResponseDTO>> getAllSunnyDays() {
-        List<CityResponseDTO> forecasts = findAllForecasts.findWarmDays();
-        return ResponseEntity.ok(forecasts);
-    }
+        model.addAttribute("sunny", sunny);
+        model.addAttribute("rainy", rainy);
 
-    @GetMapping("/rainy-days")
-    public ResponseEntity<List<CityResponseDTO>> getAllRainyDays() {
-        List<CityResponseDTO> forecasts = findAllForecasts.findRainyDays();
-        return ResponseEntity.ok(forecasts);
+        return "forecast-view";
     }
 }

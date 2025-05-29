@@ -35,6 +35,5 @@ public class City {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
     @ToString.Exclude
-    @JsonBackReference
     private Set<Forecast> forecasts;
 }
