@@ -7,51 +7,67 @@
 </head>
 <body class="bg-light">
 <div class="container mt-5">
-    <h1 class="mb-4">Weather Forecast</h1>
+    <div class="d-flex justify-content-center">
+        <h1 class="mb-4">Weather Forecast</h1>
+    </div>
 
-    <div th:if="${sunny}">
-        <h2>Sunny Days (Temp > 25°C)</h2>
-        <div th:each="city : ${sunny}">
+    <div th:if="${warmDays}">
+        <h2>Warm Days (Temp > 25°C)</h2>
+        <div th:each="city : ${warmDays}">
             <h4 th:text="${city.name}"></h4>
-            <table class="table table-bordered">
-                <thead class="table-light">
-                <tr>
-                    <th class="table-warning">Date</th>
-                    <th class="table-warning">Weather</th>
-                    <th class="table-warning">Maximum Temperature</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="forecast : ${city.forecasts}">
-                    <td class="col-lg-4" th:text="${#temporals.format(forecast.forecastDate, 'dd/MM/yyyy')}"></td>
-                    <td class="col-lg-4" th:text="${forecast.weatherMain}"></td>
-                    <td class="col-lg-4" th:text="${forecast.tempMax} + ' °C'"></td>
-                </tr>
-                </tbody>
-            </table>
+
+            <div th:if="${city.forecasts != null and !#lists.isEmpty(city.forecasts)}">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="table-warning">Date</th>
+                        <th class="table-warning">Weather</th>
+                        <th class="table-warning">Maximum Temperature</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="forecast : ${city.forecasts}">
+                        <td class="col-lg-4" th:text="${#temporals.format(forecast.forecastDate, 'dd/MM/yyyy')}"></td>
+                        <td class="col-lg-4" th:text="${forecast.weatherMain}"></td>
+                        <td class="col-lg-4" th:text="${forecast.tempMax} + ' °C'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-muted" th:unless="${city.forecasts != null and !#lists.isEmpty(city.forecasts)}">
+                No warm days found / data is unavailable.
+            </p>
         </div>
     </div>
 
-    <div class="mt-5" th:if="${rainy}">
+    <div class="mt-5" th:if="${rainyDays}">
         <h2>Rainy Days (Rain, Drizzle, Thunderstorm)</h2>
-        <div th:each="city : ${rainy}">
+        <div th:each="city : ${rainyDays}">
             <h4 th:text="${city.name}"></h4>
-            <table class="table table-bordered">
-                <thead class="table-light">
-                <tr>
-                    <th class="table-info">Date</th>
-                    <th class="table-info">Weather</th>
-                    <th class="table-info">Maximum Temperature</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="forecast : ${city.forecasts}">
-                    <td class="col-lg-4" th:text="${#temporals.format(forecast.forecastDate, 'dd/MM/yyyy')}"></td>
-                    <td class="col-lg-4" th:text="${forecast.weatherMain}"></td>
-                    <td class="col-lg-4" th:text="${forecast.tempMax} + ' °C'"></td>
-                </tr>
-                </tbody>
-            </table>
+
+            <div th:if="${city.forecasts != null and !#lists.isEmpty(city.forecasts)}">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="table-info">Date</th>
+                        <th class="table-info">Weather</th>
+                        <th class="table-info">Maximum Temperature</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="forecast : ${city.forecasts}">
+                        <td class="col-lg-4" th:text="${#temporals.format(forecast.forecastDate, 'dd/MM/yyyy')}"></td>
+                        <td class="col-lg-4" th:text="${forecast.weatherMain}"></td>
+                        <td class="col-lg-4" th:text="${forecast.tempMax} + ' °C'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-muted" th:unless="${city.forecasts != null and !#lists.isEmpty(city.forecasts)}">
+                No rainy days found / data is unavailable.
+            </p>
         </div>
     </div>
 </div>

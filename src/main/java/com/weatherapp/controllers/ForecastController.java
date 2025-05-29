@@ -1,6 +1,6 @@
 package com.weatherapp.controllers;
 
-import com.weatherapp.dtos.CityResponseDTO;
+import com.weatherapp.dtos.CityForecastResponseDTO;
 import com.weatherapp.services.ForecastQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,11 +17,11 @@ public class ForecastController {
 
     @GetMapping("/forecasts")
     public String showWeather(Model model) {
-        List<CityResponseDTO> sunny = forecastQueryService.findWarmDays();
-        List<CityResponseDTO> rainy = forecastQueryService.findRainyDays();
+        List<CityForecastResponseDTO> warmDays = forecastQueryService.findWarmDays();
+        List<CityForecastResponseDTO> rainyDays = forecastQueryService.findRainyDays();
 
-        model.addAttribute("sunny", sunny);
-        model.addAttribute("rainy", rainy);
+        model.addAttribute("warmDays", warmDays);
+        model.addAttribute("rainyDays", rainyDays);
 
         return "forecast-view";
     }
