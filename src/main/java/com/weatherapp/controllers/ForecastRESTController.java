@@ -1,6 +1,6 @@
 package com.weatherapp.controllers;
 
-import com.weatherapp.dtos.CityResponseDTO;
+import com.weatherapp.dtos.CityForecastResponseDTO;
 import com.weatherapp.services.ForecastManagementService;
 import com.weatherapp.services.ForecastQueryService;
 import lombok.RequiredArgsConstructor;
@@ -23,18 +23,21 @@ public class ForecastRESTController {
     @PostMapping("/fetch")
     public ResponseEntity<String> fetchAndSaveForecasts() {
         forecastManagementService.insertForecastsIntoDatabase();
+
         return ResponseEntity.ok("Forecasts fetched and saved successfully.");
     }
 
     @GetMapping("/sunny-days")
-    public ResponseEntity<List<CityResponseDTO>> getAllSunnyDays() {
-        List<CityResponseDTO> forecasts = forecastQueryService.findWarmDays();
+    public ResponseEntity<List<CityForecastResponseDTO>> getAllSunnyDays() {
+        List<CityForecastResponseDTO> forecasts = forecastQueryService.findWarmDays();
+
         return ResponseEntity.ok(forecasts);
     }
 
     @GetMapping("/rainy-days")
-    public ResponseEntity<List<CityResponseDTO>> getAllRainyDays() {
-        List<CityResponseDTO> forecasts = forecastQueryService.findRainyDays();
+    public ResponseEntity<List<CityForecastResponseDTO>> getAllRainyDays() {
+        List<CityForecastResponseDTO> forecasts = forecastQueryService.findRainyDays();
+
         return ResponseEntity.ok(forecasts);
     }
 }

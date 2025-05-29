@@ -1,8 +1,7 @@
 package com.weatherapp.services.impl;
 
-import com.weatherapp.converters.CityConverter;
 import com.weatherapp.converters.ForecastConverter;
-import com.weatherapp.dtos.CityResponseDTO;
+import com.weatherapp.dtos.CityForecastResponseDTO;
 import com.weatherapp.dtos.ForecastResponseDTO;
 import com.weatherapp.entities.City;
 import com.weatherapp.entities.Forecast;
@@ -22,33 +21,32 @@ public class ForecastQueryServiceImpl implements ForecastQueryService {
     private final ForecastRepository forecastRepository;
     private final CityRepository cityRepository;
     private final ForecastConverter forecastConverter;
-    private final CityConverter cityConverter;
 
     @Override
-    public List<CityResponseDTO> findWarmDays() {
+    public List<CityForecastResponseDTO> findWarmDays() {
         List<Forecast> forecasts = forecastRepository.findWarmDays();
         return getCityResponseDTOS(forecasts);
     }
 
     @Override
-    public List<CityResponseDTO> findRainyDays() {
+    public List<CityForecastResponseDTO> findRainyDays() {
         List<Forecast> forecasts = forecastRepository.findRainyDays();
         return getCityResponseDTOS(forecasts);
     }
 
-    private List<CityResponseDTO> getCityResponseDTOS(List<Forecast> forecasts) {
+    private List<CityForecastResponseDTO> getCityResponseDTOS(List<Forecast> forecasts) {
         List<City> cities = cityRepository.findAll();
-        List<CityResponseDTO> cityResponseDTOS = new ArrayList<>();
+        List<CityForecastResponseDTO> cityForecastResponseDTOS = new ArrayList<>();
         for (City city : cities) {
             List<Forecast> forecastForCity =
                     forecasts.stream().filter(forecast -> forecast.getCity().equals(city)).toList();
             List<ForecastResponseDTO> forecastResponseDTOS =
                     forecastForCity.stream().map(forecastConverter::toForecastResponseDTO).toList();
-            CityResponseDTO cityResponseDTO = cityConverter.toCityResponseDTO(city, forecastResponseDTOS);
+            CityForecastResponseDTO cityForecastResponseDTO = forecastConverter.toCityResponseDTO(city, forecastResponseDTOS);
 
-            cityResponseDTOS.add(cityResponseDTO);
+            cityForecastResponseDTOS.add(cityForecastResponseDTO);
         }
 
-        return cityResponseDTOS;
+        return cityForecastResponseDTOS;
     }
 }
