@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * This class is responsible for providing conversion methods from {@link Forecast} entity to Data Transfer Objects
@@ -33,16 +32,11 @@ public class ForecastConverter {
     /**
      * Converts a {@link City} entity and a list of {@link ForecastResponseDTO} into a {@link CityForecastResponseDTO}.
      *
-     * @param city      The {@link City} entity to include in the response
+     * @param cityName  Name with type {@link String} of the {@link City}
      * @param forecasts List of {@link ForecastResponseDTO} representing the weather forecasts for the city
      * @return a {@link CityForecastResponseDTO} containing city details and its associated forecasts
      */
-    public CityForecastResponseDTO toCityResponseDTO(City city, List<ForecastResponseDTO> forecasts) {
-        UUID id = city.getId();
-        String name = city.getName();
-        double lat = city.getLat();
-        double lon = city.getLon();
-
-        return new CityForecastResponseDTO(id, name, lat, lon, forecasts);
+    public CityForecastResponseDTO toCityResponseDTO(String cityName, List<ForecastResponseDTO> forecasts) {
+        return new CityForecastResponseDTO(cityName, forecasts);
     }
 }
