@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,11 +36,14 @@ public class ForecastManagementServiceImpl implements ForecastManagementService 
     private final RestTemplate restTemplate = new RestTemplate();
     private static final Logger log = LoggerFactory.getLogger(ForecastManagementServiceImpl.class);
 
+    @Scheduled(cron = "0 0 0 * * *")
     @Transactional
     @Override
     public void insertForecastsIntoDatabase() {
-        List<City> cities = cityRepository.findAll();
+        forecastRepository.deleteAll();
+        forecastRepository.flush();
 
+        List<City> cities = cityRepository.findAll();
         List<Forecast> allForecasts = new ArrayList<>();
         for (City city : cities) {
             String apiUrl = String.format(
