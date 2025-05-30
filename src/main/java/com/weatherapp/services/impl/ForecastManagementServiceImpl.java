@@ -76,8 +76,8 @@ public class ForecastManagementServiceImpl implements ForecastManagementService 
     /**
      * Helper method that parses the JSON response from the OpenWeatherMap API to a list of {@link Forecast} entities.
      *
-     * @param json  The JSON response body from the OpenWeatherMap API
-     * @param city  The {@link City} entity the forecast is associated with
+     * @param json The JSON response body from the OpenWeatherMap API
+     * @param city The {@link City} entity the forecast is associated with
      * @return a list of {@link Forecast} entities parsed from the response
      */
     private List<Forecast> forecastJSONParser(String json, City city) {
