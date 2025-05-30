@@ -6,7 +6,6 @@ import com.weatherapp.services.ForecastQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +19,7 @@ public class ForecastRESTController {
     private final ForecastManagementService forecastManagementService;
     private final ForecastQueryService forecastQueryService;
 
-    @PostMapping("/fetch")
+    @GetMapping("/fetch")
     public ResponseEntity<String> fetchAndSaveForecasts() {
         forecastManagementService.insertForecastsIntoDatabase();
 
