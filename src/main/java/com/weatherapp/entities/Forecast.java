@@ -14,7 +14,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -24,8 +23,8 @@ import java.util.UUID;
 @Entity
 public class Forecast {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private LocalDate forecastDate;
 

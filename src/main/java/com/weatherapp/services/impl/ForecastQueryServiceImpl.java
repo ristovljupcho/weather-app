@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Implementation of {@link ForecastQueryService} interface that provides methods to query weather forecasts
@@ -61,7 +60,7 @@ public class ForecastQueryServiceImpl implements ForecastQueryService {
         List<CityForecastResponseDTO> cityForecastResponseDTOS = new ArrayList<>();
 
         for (City city : cities) {
-            UUID cityId = city.getId();
+            Long cityId = city.getId();
             List<Forecast> forecastForCity =
                     forecasts.stream().filter(forecast -> forecast.getCity().getId().equals(cityId)).toList();
             List<ForecastResponseDTO> forecastResponseDTOS =

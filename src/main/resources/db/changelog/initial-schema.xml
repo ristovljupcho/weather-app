@@ -12,7 +12,7 @@
             </not>
         </preConditions>
         <createTable tableName="city">
-            <column name="id" type="UUID">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(100) NOT NULL"/>
@@ -33,7 +33,7 @@
             </not>
         </preConditions>
         <createTable tableName="forecast">
-            <column name="id" type="UUID">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="forecast_date" type="DATE NOT NULL"/>

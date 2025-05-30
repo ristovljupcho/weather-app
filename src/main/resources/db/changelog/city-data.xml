@@ -7,21 +7,21 @@
 
     <changeSet id="populate-city-table" author="ristovljupcho">
         <insert tableName="city">
-            <column name="id" value="a1eebc99-9c0b-4ef8-bb6d-6bb9bd380a01"/>
+            <column name="id" value="1"/>
             <column name="name" value="Skopje"/>
             <column name="lat" value="41.9981"/>
             <column name="lon" value="21.4254"/>
         </insert>
 
         <insert tableName="city">
-            <column name="id" value="b2eebc99-9c0b-4ef8-bb6d-6bb9bd380a02"/>
+            <column name="id" value="2"/>
             <column name="name" value="Ohrid"/>
             <column name="lat" value="41.1167"/>
             <column name="lon" value="20.8000"/>
         </insert>
 
         <insert tableName="city">
-            <column name="id" value="c3eebc99-9c0b-4ef8-bb6d-6bb9bd380a03"/>
+            <column name="id" value="3"/>
             <column name="name" value="Bitola"/>
             <column name="lat" value="41.0328"/>
             <column name="lon" value="21.3361"/>

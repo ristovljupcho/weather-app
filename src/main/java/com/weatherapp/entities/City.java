@@ -15,7 +15,6 @@ import lombok.ToString;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -25,8 +24,8 @@ import java.util.UUID;
 @Entity
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
