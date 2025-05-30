@@ -5,7 +5,6 @@ import lombok.experimental.UtilityClass;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 @UtilityClass
 public class CityTestData {
@@ -13,7 +12,7 @@ public class CityTestData {
 
     public List<City> getCities() {
         City city1 = new City(
-                UUID.fromString("a1eebc99-9c0b-4ef8-bb6d-6bb9bd380a01"),
+                1L,
                 CITY_NAME,
                 41.99810,
                 21.42540,

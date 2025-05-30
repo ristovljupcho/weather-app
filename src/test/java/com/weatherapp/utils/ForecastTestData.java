@@ -7,7 +7,6 @@ import lombok.experimental.UtilityClass;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @UtilityClass
 public class ForecastTestData {
@@ -17,21 +16,21 @@ public class ForecastTestData {
 
     public static List<Forecast> getForecasts() {
         Forecast forecast1 = new Forecast(
-                UUID.fromString("a1eebc99-9c0b-4ef8-bb6d-6bb9bd380a01"),
+                1L,
                 DATE,
                 TEMP_MAX,
                 WEATHER_MAIN,
                 CityTestData.getCity()
         );
         Forecast forecast2 = new Forecast(
-                UUID.fromString("a1eebc99-9c0b-4ef8-bb6d-6bb9bd380a02"),
+                2L,
                 DATE,
                 TEMP_MAX,
                 WEATHER_MAIN,
                 CityTestData.getCity()
         );
         Forecast forecast3 = new Forecast(
-                UUID.fromString("a1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03"),
+                3L,
                 DATE,
                 TEMP_MAX,
                 WEATHER_MAIN,
